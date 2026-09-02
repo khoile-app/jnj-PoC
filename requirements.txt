@@ -1,0 +1,3 @@
+robotframework>=7.0
+robotframework-seleniumlibrary>=6.2
+eyes-robotframework>=6.4.51
