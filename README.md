@@ -30,6 +30,7 @@ Before the session, each participant should have:
 
 ## Setup
 
+**macOS / Linux:**
 ```bash
 # from this project folder
 python3 -m venv .venv
@@ -37,10 +38,38 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+**Windows (PowerShell — the default VS Code terminal):**
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
+If activation is blocked with a script-execution error, run
+`Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned` first, then retry.
+
+**Windows (Command Prompt):**
+```cmd
+python -m venv .venv
+.venv\Scripts\activate.bat
+pip install -r requirements.txt
+```
+
+> ⚠️ On Windows, `activate.bat` only works in Command Prompt. Running it from a PowerShell
+> terminal silently does nothing to your shell (it runs in a child process whose environment
+> changes don't persist), so `pip install` and `robot` will keep using your global Python
+> instead of `.venv` — and the Eyes library will appear "missing" even though it installed fine.
+> Use `Activate.ps1` in PowerShell, or switch the terminal to Command Prompt.
+
+Confirm the venv is really active before installing anything — the prompt should show `(.venv)`,
+and `where python` (Windows) / `which python3` (macOS/Linux) should point inside `.venv`.
+
 Set your Applitools API key (get it from the Applitools dashboard under your team's account settings):
 
 ```bash
-export APPLITOOLS_API_KEY=<your-api-key>
+export APPLITOOLS_API_KEY=<your-api-key>       # macOS/Linux
+```
+```powershell
+$env:APPLITOOLS_API_KEY = "<your-api-key>"     # Windows PowerShell
 ```
 
 Or copy `.env.example` to `.env` and fill in your key — it's already excluded from git via `.gitignore`.
